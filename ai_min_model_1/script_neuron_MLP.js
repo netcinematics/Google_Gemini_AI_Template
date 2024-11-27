@@ -54,8 +54,22 @@ INPUTS_TENSOR.dispose();
 //DEFINE MODEL
 const custom_model = tf.sequential(); //flow in sequence.
 //2inputs, 1 weight, dense neuron
-custom_model.add(tf.layers.dense({inputShape:[1], units:1}));
+// custom_model.add(tf.layers.dense({inputShape:[1], units:1}));
+custom_model.add(tf.layers.dense({
+    inputShape:[1], units:25, activation:'relu'//more neurons solves error loss
+    // inputShape:[1], units:100, activation:'relu'//more neurons solves error loss
+    // inputShape:[1], units:20, activation:'relu'//more neurons solves error loss
+    // inputShape:[1], units:3, activation:'relu'//activation on inputs
+}));
+//hidden layer
+custom_model.add(tf.layers.dense({units:5,activation:'relu'}));
+// custom_model.add(tf.layers.dense({units:100,activation:'relu'}));
+
+// dense 3 neurons input layer
+// dense output layer
+custom_model.add(tf.layers.dense({units:1}));
 // custom_model.add(tf.layers.dense({inputShape:[2], units:1}));
+console.log('Model Summary:')
 custom_model.summary();
 
 function evaluate_model(){
@@ -113,7 +127,8 @@ async function train_model(){ //#10:45, only train once, predict many times.
         shuffle:true,         //data shuffle for input + output (correlates but not in sequence).
         batchSize:2,  //small data sample
         // batchSize:64,  //1 noisy no line of best fit, 64 time sample line fit.
-        epochs:80  //no learning past 80
+        epochs:200  //MLP needs more iterations
+        // epochs:80  //no learning past 80
         // epochs:200  //get a chance to learn from small data - longer run.#4:14
         // epochs:10  //go through training once, here 10.
     }) //experiment on these numbers. to find "best line of fit"
@@ -130,9 +145,15 @@ async function train_model(){ //#10:45, only train once, predict many times.
 }
 
 //******************TRAINING VARIABLES--------------------
-const LEARNING_RATE = 0.01;//steps to change weight / bias.
+const LEARNING_RATE = 0.0001;//for MLP
+// const LEARNING_RATE = 0.001;//many little changes is like 1 big change.
+// const LEARNING_RATE = 0.01;//steps to change weight / bias.
 //number too high = NaN , number low slow.
 const OPTIMIZER = tf.train.sgd(LEARNING_RATE);
 
 train_model();
 
+//TRADEOFF - more neurons better, but more processing power.
+//squeeze performance. less accurate for more speed, less memory.
+//tweek: neurons, layers, epoch, batchsize, learn rate. = performance.
+//HYPER PARAMETERS takes practice to TUNE.
