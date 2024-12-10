@@ -18,7 +18,18 @@ Exciting baseline template, for Google Gemini AI API.
     4) The file extension needs to be .mjs to signify 'module', else require()
     5) last <code>node ai_server_1.mjs</code>
     6) Add Google AI Code to connect with KEY.
+    7) > node ai_server1.mjs
+
+    8)  TensorFlow.js in Node.js
+
+     TWO TYPES: CPU or GPU
+
+    1. npm install @tensorflow/tfjs-node
+
+    2. npm install @tensorflow/tfjs-node-gpu
+    (NVDA Graphics card with CUDA LIBRARY!)
+
+
 <hr>
     ## INSTRUCTIONS:
 
-    

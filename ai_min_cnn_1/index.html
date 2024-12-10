@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%; background:black;color:steelblue; display:flex;flex:1;width:100%;">
+  <head>
+    <title>Custom Model</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+  </head>  
+  <body style="height:100%; background:black;color:steelblue; display:flex;flex:1;width:100%; padding:1em;">
+    <h1>Custom TFJS Model</h1>
+    
+    <!-- <p id="status">Awaiting TF.js</p>
+    <p id="summary">Awaiting Model.</p> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js" type="text/javascript"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script> -->
+    <!-- <img id="exampleImg" width="640" height = "360" crossorigin 
+        src="https://storage.googleapis.com/jmstore/TensorFlowJS/EdX/standing.jpg" /> -->
+
+    <!-- <script type="module" src="./script_neuron_MLP.js" defer></script> -->
+    <!-- <script type="module" src="./script_model_expo.js" defer></script> -->
+    <!-- <script type="module" src="./script_new_model.js" defer></script> -->
+    <!-- <script type="module" src="./script_neuron_1.js" defer></script> -->
+    <!-- <script type="module" src="./script.js"></script> -->
+    <script type="module">
+
+//CREATE and DEFINE CNN MODEL ARCHITECTURE
+
+const model = tf.sequential();
+model.add(tf.layers.dense({inputShape:[784],units:32,activation:'relu'}));
+model.add(tf.layers.dense({units:16,activation:'relu'}));
+model.add(tf.layers.dense({units:10,activation:'softmax'}));
+model.summary();
+
+const LOOKUP = ['Label1','Label2','Label3']
+    </script>
+  </body>
+</html>

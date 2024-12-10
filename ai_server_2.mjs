@@ -20,14 +20,14 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from 'dotenv';
 dotenv.config();
 const API_KEY = process.env.API_KEY;
-console.log('Alive:')
+console.log('ai Alive...')
 
 async function embedContent() {
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
     model: "text-embedding-004",
   });
-  const result = await model.embedContent("Hello world!");
+  const result = await model.embedContent("Hollo Wurldz!");
   console.log("EMBEDZ 1:",result.embedding);
 }
 
@@ -41,15 +41,12 @@ async function batchEmbedContents() {
     return { content: { role: "user", parts: [{ text }] } };
   }
 
-  const result = await model.batchEmbedContents({
+  const result = await model.batchEmbedContents({ //RECURSIVE BATCH LOADER
     requests: [
-      textToRequest("What is the meaning of life?"),
-      textToRequest("How much wood would a woodchuck chuck?"),
-      textToRequest("How does the brain work?"),
+      textToRequest("What is Hollo Wurldz?"),
     ],
   });
-
-  console.log("EMBEDZ 2:",result.embeddings);
+  console.log("TXT EMBED 2:",result.embeddings);
 }
 
 async function runAll() {
